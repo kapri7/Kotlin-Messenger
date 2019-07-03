@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".registerlogin.PhoneAuthentication">
+
+    <EditText
+            android:id="@+id/phnNoTxt"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="180dp"
+            android:background="@drawable/rounded_edittext_register_login"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Phone Number"
+            android:paddingLeft="16dp"
+            android:inputType="phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
+
+    <EditText
+            android:id="@+id/verifiTxt"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_edittext_register_login"
+            android:ems="10"
+            android:hint="Verification Code"
+            android:gravity="center"
+            android:inputType="phone"
+            android:paddingLeft="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/phnNoTxt"
+            app:layout_constraintStart_toStartOf="@+id/phnNoTxt"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/veriBtn"/>
+
+    <Button
+            android:id="@+id/veriBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Verify"
+            android:background="@drawable/rounded_button"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="@+id/verifiTxt"
+            app:layout_constraintStart_toStartOf="@+id/verifiTxt"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="12dp" app:layout_constraintTop_toBottomOf="@+id/phnNoTxt"/>
+    <Button
+            android:id="@+id/authBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Authenticate"
+            android:background="@drawable/rounded_button"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="@+id/verifiTxt"
+            app:layout_constraintStart_toStartOf="@+id/verifiTxt"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/verifiTxt"/>
+    <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignTop="@+id/phnNoTxt"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintVertical_bias="0.366"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

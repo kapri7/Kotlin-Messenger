@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.example.myapplication">
+
+    <!-- Network permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- SIP permissions -->
+    <uses-permission android:name="android.permission.USE_SIP" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CONFIGURE_SIP" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <!-- Check that device has microphone and can do sip calls. -->
+    <uses-feature android:name="android.hardware.sip.voip" android:required="true" />
+    <uses-feature android:name="android.hardware.microphone" android:required="true" />
+
+    <application
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label=""
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+        <activity
+                android:name=".messages.NavigationActivity"
+                android:label="@string/title_activity_main2"
+                android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".messages.ChatLogActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".messages.NavigationActivity"/>
+
+        </activity>
+        <activity android:name=".contacts.ContactList">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".messages.NavigationActivity"/>
+
+        </activity>
+        <activity android:name=".messages.NewMessageActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".messages.NavigationActivity"/>
+        </activity>
+        <activity android:name=".contacts.ContactActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".messages.NavigationActivity"/>
+        </activity>
+        <activity android:name=".settings.SettingsActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".messages.NavigationActivity"/>
+        </activity>
+        <activity android:name=".settings.EditActivity">
+
+        </activity>
+        <activity android:name=".registerlogin.PhoneAuthentication"/>
+        <activity
+                android:name=".ui.MainActivity"
+                android:theme="@style/AppTheme"
+                android:label="@string/app_name"
+                android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+                android:name=".ui.CallActivity"
+                android:theme="@style/CallTheme"
+                android:label="@string/call_title"
+                android:screenOrientation="portrait"/>
+
+        <service android:exported="false" android:name=".call.CallService" />
+
+        <receiver android:exported="false" android:name=".call.CallReceiver">
+            <intent-filter>
+                <action android:name="com.example.application.INCOMING_CALL" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
