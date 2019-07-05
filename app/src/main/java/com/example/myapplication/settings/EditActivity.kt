@@ -45,6 +45,7 @@ class EditActivity : AppCompatActivity() {
     private fun fetchCurrentUser() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        imageUrl = NavigationActivity.currentUser?.photoImageUrl
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 NavigationActivity.currentUser = p0.getValue(User::class.java)
@@ -73,6 +74,7 @@ class EditActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             //proceed and check what the selected image was...
+
             Log.d("RegisterActivity", "Photo was selected")
             selectedPhotoUri = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
@@ -83,8 +85,7 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
-    var photoUrl: String? = ""
-
+    private var imageUrl: String? = null
     private fun uploadImageToFirebaseStorage() {
         if (selectedPhotoUri == null) return
 
@@ -99,8 +100,14 @@ class EditActivity : AppCompatActivity() {
                     Log.d("RegisterActivity", "FileLocation: $it")
                     //changeCurrentUser(it.toString())
 
-                    photoUrl = it.toString()
+                    val uid = FirebaseAuth.getInstance()
+                    imageUrl = it.toString()
+                    NavigationActivity.currentUser?.photoImageUrl=it.toString()
+                    Log.d("Photo", "${it.toString()}")
                 }
+                    .addOnFailureListener {
+                        Log.d("Photo", "${it.toString()}")
+                    }
             }
             .addOnFailureListener {
                 //do some logging here
@@ -108,29 +115,23 @@ class EditActivity : AppCompatActivity() {
 
     }
 
-    private fun changeCurrentUser() {//todo:error with changing photo
+    private fun changeCurrentUser() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        if (photoUrl != "") {
-            ref.child("photoImageUrl").setValue(photoUrl)
-            Log.d("Photo", "${photoUrl.toString()}")
-        }
-        var tmp = enter_name.text.toString()
-        if (tmp != "")
-            ref.child("username").setValue(tmp)
-        tmp = enter_id.text.toString()
-        if (tmp != "")
-            ref.child("sipId").setValue(tmp)
-        tmp = enter_domain.text.toString()
-        if (tmp != "")
-            ref.child("domain").setValue(tmp)
-        tmp = enter_description.text.toString()
+        val user: User = User(
+            uid!!,
+            enter_name.text.toString(),
 
-        if (tmp != "")
-            ref.child("description").setValue(tmp)
-        tmp = enter_password.text.toString()
-        if (tmp != "")
-            ref.child("password").setValue(tmp)
+            NavigationActivity.currentUser!!.phone,
+            imageUrl!!,
+            enter_id.text.toString(),
+            enter_domain.text.toString(),
+            enter_password.text.toString(),
+            enter_description.text.toString()
+        )
+        ref.setValue(user)
+            .addOnSuccessListener { Log.d("EditActivity", "Changed successfully") }
+            .addOnFailureListener { Log.d("EditActivity", "Error while changing user data!!!") }
         intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
         finish()
