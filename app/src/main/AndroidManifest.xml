@@ -59,7 +59,7 @@
         <activity android:name=".contacts.ContactActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".messages.NavigationActivity"/>
+                    android:value=".contacts.ContactList"/>
         </activity>
         <activity android:name=".settings.SettingsActivity">
             <meta-data

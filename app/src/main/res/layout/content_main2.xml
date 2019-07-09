@@ -11,8 +11,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/contact_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="0sp"
+            android:layout_height="0sp"
             android:background="@color/background"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"

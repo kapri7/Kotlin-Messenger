@@ -30,33 +30,7 @@ class ContactActivity : AppCompatActivity() {
 
 
 
-        big_contact_number.setOnClickListener {
-            Log.d(TAG, "click")
-            val dialog = Dialog(this)
-            dialog.setContentView(R.layout.activity_dialog)
-            dialog.show()
-
-            val startMessage =dialog.findViewById<TextView>(R.id.start_message)
-            startMessage.setOnClickListener {
-                val user: User? = User(
-                    intent.getStringExtra(ContactList.UID),
-                    intent.getStringExtra(ContactList.USER_KEY),
-                    "",
-                    intent.getStringExtra(ContactList.PHOTO_URL),
-                    "",
-                    "",
-                    "",
-                    ""
-                )
-
-                intent = Intent(this, ChatLogActivity::class.java)
-                intent.putExtra(NewMessageActivity.USER_KEY, user)
-                startActivity(intent)
-                finish()
-            }
-            val startCall =dialog.findViewById<TextView>(R.id.start_call)
-
-            startCall.setOnClickListener {
+        call_contact_button.setOnClickListener {
                 val user: User? = User(
                     intent.getStringExtra(ContactList.UID),
                     intent.getStringExtra(ContactList.USER_KEY),
@@ -72,8 +46,6 @@ class ContactActivity : AppCompatActivity() {
                 intent.putExtra(NewMessageActivity.USER_KEY, user?.sipId)
                 startActivity(intent)
                 finish()
-            }
-
         }
 
     }
