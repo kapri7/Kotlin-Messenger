@@ -39,7 +39,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         verifyUserIsLoggedIn()
         setContentView(R.layout.activity_navigation)
-        supportActionBar?.title = "Sip Caller"
+        supportActionBar?.title = "Latest Messages"
 
         contact_list.adapter = adapter
         contact_list.addItemDecoration(
@@ -64,7 +64,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         fetchCurrentUser()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+            setSupportActionBar(toolbar)
 
         val drawerLayout: androidx.drawerlayout.widget.DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -165,11 +165,6 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main2, menu)
-        return true
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
