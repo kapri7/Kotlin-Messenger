@@ -20,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:fontFamily="@font/istok_regular"
                 android:layout_margin="4sp"
         />
         <androidx.appcompat.widget.AppCompatTextView
@@ -27,13 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:fontFamily="@font/istok_regular"
                 android:layout_margin="4sp"/>
-        <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/contact_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_margin="4sp"/>
+
 
     </LinearLayout>
 

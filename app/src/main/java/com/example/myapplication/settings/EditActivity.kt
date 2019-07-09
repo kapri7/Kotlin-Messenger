@@ -81,13 +81,16 @@ class EditActivity : AppCompatActivity() {
             selected_image_view.setImageBitmap(bitmap)
 
             select_image_button.alpha = 0f
-            uploadImageToFirebaseStorage()
+            //uploadImageToFirebaseStorage()
         }
     }
 
     private var imageUrl: String? = null
     private fun uploadImageToFirebaseStorage() {
-        if (selectedPhotoUri == null) return
+        if (selectedPhotoUri == null) {
+            changeCurrentUser()
+            return
+        }
 
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
@@ -98,12 +101,12 @@ class EditActivity : AppCompatActivity() {
 
                 ref.downloadUrl.addOnSuccessListener {
                     Log.d("RegisterActivity", "FileLocation: $it")
-                    //changeCurrentUser(it.toString())
 
-                    val uid = FirebaseAuth.getInstance()
                     imageUrl = it.toString()
-                    NavigationActivity.currentUser?.photoImageUrl=it.toString()
+                    NavigationActivity.currentUser?.photoImageUrl = it.toString()
                     Log.d("Photo", "${it.toString()}")
+                    changeCurrentUser()
+
                 }
                     .addOnFailureListener {
                         Log.d("Photo", "${it.toString()}")
@@ -141,7 +144,8 @@ class EditActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.button_save -> {
-                changeCurrentUser()
+                uploadImageToFirebaseStorage()
+                //changeCurrentUser()
             }
         }
         return super.onOptionsItemSelected(item)
